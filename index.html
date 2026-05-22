@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abhay Sankar K — Computer Vision & ML Engineer</title>
+  <meta name="description"
+    content="Portfolio of Abhay Sankar K, Computer Vision & ML Engineer specializing in end-to-end AI pipelines, FastAPI backends, and enterprise MLOps." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #07070f;
+      --bg2: #0d0d1a;
+      --accent: #6c63ff;
+      --accent2: #00d4ff;
+      --accent3: #ff6584;
+      --text: #e8e8f0;
+      --muted: #8888aa;
+      --card: rgba(255, 255, 255, 0.04);
+      --border: rgba(255, 255, 255, 0.08);
+      --radius: 16px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(7, 7, 15, 0.8);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-weight: 800;
+      font-size: 1.1rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 7rem 1.5rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* animated gradient orbs */
+    .hero::before,
+    .hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.15;
+      animation: pulse 8s ease-in-out infinite alternate;
+    }
+
+    .hero::before {
+      width: 600px;
+      height: 600px;
+      background: var(--accent);
+      top: -150px;
+      left: -150px;
+    }
+
+    .hero::after {
+      width: 500px;
+      height: 500px;
+      background: var(--accent2);
+      bottom: -100px;
+      right: -100px;
+      animation-delay: 3s;
+    }
+
+    @keyframes pulse {
+      from {
+        transform: scale(1);
+        opacity: 0.12;
+      }
+
+      to {
+        transform: scale(1.2);
+        opacity: 0.2;
+      }
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 0.35rem 1rem;
+      border: 1px solid rgba(108, 99, 255, 0.4);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--accent2);
+      background: rgba(108, 99, 255, 0.08);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-role {
+      font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+      color: var(--muted);
+      font-weight: 400;
+      max-width: 600px;
+      margin: 0 auto 0.8rem;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 3rem;
+      font-style: italic;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    /* ─── METRIC CARDS ─── */
+    .metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+
+    .metric-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 2rem;
+      backdrop-filter: blur(10px);
+      min-width: 180px;
+      text-align: center;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(108, 99, 255, 0.4);
+      box-shadow: 0 0 30px rgba(108, 99, 255, 0.15);
+    }
+
+    .metric-icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-value {
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .metric-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 500;
+      margin-top: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── CTA BUTTONS ─── */
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 0.6s 0.5s ease both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.8rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #5548e0);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(108, 99, 255, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(108, 99, 255, 0.5);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: rgba(108, 99, 255, 0.5);
+      background: rgba(108, 99, 255, 0.06);
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 600px) {
+      nav {
+        padding: 1rem 1.25rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .metric-card {
+        min-width: 140px;
+        padding: 1.25rem 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Abhay Sankar K</div>
+    <ul class="nav-links">
+      <li><a href="#cv">CV Work</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#value">At Infosys</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <h1>Building AI That Ships<br /><span>to Production</span></h1>
+    <p class="hero-role">Computer Vision &amp; ML Engineer &mdash; End-to-End AI Pipelines</p>
+    <p class="hero-subtitle">"Bridging the gap between complex CV architectures and production-ready enterprise
+      workflows."</p>
+
+    <div class="metrics">
+      <div class="metric-card">
+        <div class="metric-icon">💰</div>
+        <div class="metric-value" data-target="145000" data-prefix="$" data-suffix="K">$0K</div>
+        <div class="metric-label">Annualized Value Delivered</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon">⚡</div>
+        <div class="metric-value" data-target="60" data-suffix="%">0%</div>
+        <div class="metric-label">Reduction in Processing Time</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon">🏆</div>
+        <div class="metric-value" data-target="30000" data-prefix="$" data-suffix="K">$0K</div>
+        <div class="metric-label">CV Initiative Profit Generated</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon">🎖️</div>
+        <div class="metric-value">4×</div>
+        <div class="metric-label">Company Awards Won</div>
+      </div>
+    </div>
+
+    <div class="hero-ctas">
+      <a href="https://linkedin.com/in/abhayksankar" target="_blank" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+        </svg>
+        LinkedIn
+      </a>
+      <a href="#cv" class="btn btn-outline">View Projects ↓</a>
+    </div>
+  </section>
+
+  <!-- ═══ CV ANCHOR SECTION ═══ -->
+  <section id="cv" style="padding:6rem 1.5rem; max-width:1100px; margin:0 auto;">
+    <div class="reveal">
+      <p
+        style="color:var(--accent2);font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;">
+        Computer Vision — The Job</p>
+      <h2 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;letter-spacing:-0.03em;margin-bottom:0.75rem;">I've
+        Already Shipped CV to Production</h2>
+      <p style="color:var(--muted);max-width:640px;margin-bottom:3rem;">Not a Kaggle notebook. Not a demo. A real
+        pipeline that classified property images, integrated into a live production environment, and generated
+        quantifiable business value.</p>
+    </div>
+
+    <!-- Main CV project card -->
+    <div class="reveal"
+      style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem;backdrop-filter:blur(12px);margin-bottom:1.5rem;position:relative;overflow:hidden;">
+      <!-- accent strip -->
+      <div
+        style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));">
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:2rem;align-items:flex-start;">
+        <!-- Text side -->
+        <div style="flex:1;min-width:280px;">
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+            <span
+              style="background:rgba(108,99,255,0.15);border:1px solid rgba(108,99,255,0.3);border-radius:8px;padding:0.5rem;font-size:1.4rem;">🏠</span>
+            <div>
+              <h3 style="font-size:1.25rem;font-weight:800;">PropVision</h3>
+              <p style="color:var(--muted);font-size:0.85rem;">Real Estate Computer Vision &mdash; Ecesis Tech &mdash;
+                Production Deployment</p>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem;">
+            <span class="pill">Python</span><span class="pill">OpenCV</span><span class="pill">CNN</span><span
+              class="pill">Production Pipeline</span><span class="pill">Automated Labeling</span>
+          </div>
+
+          <div style="display:grid;gap:0.85rem;">
+            <div class="story-step">
+              <span class="step-num">01</span>
+              <div><strong>Architected the Model</strong>
+                <p style="color:var(--muted);font-size:0.88rem;margin-top:0.2rem;">Spearheaded development of a
+                  CNN-based classification system to predict and label diverse real estate property views from raw
+                  images using OpenCV for preprocessing.</p>
+              </div>
+            </div>
+            <div class="story-step">
+              <span class="step-num">02</span>
+              <div><strong>Integrated into Production</strong>
+                <p style="color:var(--muted);font-size:0.88rem;margin-top:0.2rem;">Connected the model directly to the
+                  live production environment — automating image labeling and metadata extraction that was previously
+                  done manually.</p>
+              </div>
+            </div>
+            <div class="story-step">
+              <span class="step-num">03</span>
+              <div><strong>Delivered Business Impact</strong>
+                <p style="color:var(--muted);font-size:0.88rem;margin-top:0.2rem;">The deployed system generated <strong
+                    style="color:var(--accent2);">$30,000 in immediate profit</strong> and contributed to <strong
+                    style="color:var(--accent2);">$145,000 in annualized value</strong> by increasing output quality and
+                  throughput.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual side -->
+        <div style="flex:0 0 260px;min-width:220px;">
+          <div
+            style="background:rgba(108,99,255,0.06);border:1px solid rgba(108,99,255,0.15);border-radius:12px;padding:1.5rem;text-align:center;">
+            <svg viewBox="0 0 200 180" style="width:100%;max-width:200px;" xmlns="http://www.w3.org/2000/svg">
+              <!-- House icon group -->
+              <rect x="20" y="80" width="70" height="60" rx="4" fill="rgba(108,99,255,0.2)"
+                stroke="rgba(108,99,255,0.5)" stroke-width="1.5" />
+              <polygon points="55,45 10,85 100,85" fill="rgba(108,99,255,0.3)" stroke="rgba(108,99,255,0.6)"
+                stroke-width="1.5" />
+              <rect x="40" y="110" width="20" height="30" rx="3" fill="rgba(0,212,255,0.4)" />
+              <!-- Second house -->
+              <rect x="110" y="90" width="65" height="50" rx="4" fill="rgba(0,212,255,0.1)" stroke="rgba(0,212,255,0.4)"
+                stroke-width="1.5" />
+              <polygon points="142,58 103,93 181,93" fill="rgba(0,212,255,0.2)" stroke="rgba(0,212,255,0.5)"
+                stroke-width="1.5" />
+              <!-- Classification labels -->
+              <rect x="25" y="148" width="58" height="18" rx="9" fill="rgba(108,99,255,0.3)" />
+              <text x="54" y="161" text-anchor="middle" fill="#a89fff" font-size="9" font-family="Inter,sans-serif"
+                font-weight="600">INTERIOR</text>
+              <rect x="113" y="148" width="58" height="18" rx="9" fill="rgba(0,212,255,0.2)" />
+              <text x="142" y="161" text-anchor="middle" fill="#6ee7f7" font-size="9" font-family="Inter,sans-serif"
+                font-weight="600">EXTERIOR</text>
+              <!-- Confidence bars -->
+              <rect x="25" y="172" width="55" height="4" rx="2" fill="rgba(108,99,255,0.5)" />
+              <text x="83" y="177" fill="var(--muted,#888)" font-size="8" font-family="Inter,sans-serif">96%</text>
+              <rect x="113" y="172" width="42" height="4" rx="2" fill="rgba(0,212,255,0.4)" />
+              <text x="158" y="177" fill="var(--muted,#888)" font-size="8" font-family="Inter,sans-serif">89%</text>
+            </svg>
+            <p style="font-size:0.75rem;color:var(--muted);margin-top:0.75rem;">Automated multi-class image
+              classification pipeline</p>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:1rem;">
+            <div
+              style="background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.15);border-radius:10px;padding:1rem;text-align:center;">
+              <div style="font-size:1.4rem;font-weight:900;color:var(--accent2);">$30K</div>
+              <div style="font-size:0.7rem;color:var(--muted);">Direct Profit</div>
+            </div>
+            <div
+              style="background:rgba(108,99,255,0.06);border:1px solid rgba(108,99,255,0.15);border-radius:10px;padding:1rem;text-align:center;">
+              <div style="font-size:1.4rem;font-weight:900;color:var(--accent);">$145K</div>
+              <div style="font-size:0.7rem;color:var(--muted);">Annual Value</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BEYOND THE MODEL SECTION ═══ -->
+  <section id="projects" style="padding:2rem 1.5rem 6rem;max-width:1100px;margin:0 auto;">
+    <div class="reveal" style="text-align:center;margin-bottom:3rem;">
+      <p
+        style="color:var(--accent);font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;">
+        The Differentiator</p>
+      <h2 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;letter-spacing:-0.03em;margin-bottom:0.75rem;">
+        Beyond the Model</h2>
+      <p style="color:var(--muted);max-width:580px;margin:0 auto;font-style:italic;font-size:1.05rem;">"A Computer
+        Vision model is only as good as the pipeline that serves it."</p>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:center;">
+
+      <!-- IDP Card -->
+      <div class="reveal project-card" style="--card-accent:var(--accent2);flex:1 1 300px;max-width:340px;">
+        <div class="card-top-bar" style="background:linear-gradient(90deg,var(--accent2),#00a3c4);"></div>
+        <div style="font-size:2rem;margin-bottom:1rem;">📄</div>
+        <h3 style="font-size:1.1rem;font-weight:800;margin-bottom:0.25rem;">Hybrid PDF Parser</h3>
+        <p style="color:var(--muted);font-size:0.82rem;margin-bottom:1.25rem;">Intelligent Document Processing &mdash;
+          Ecesis Tech &mdash; Production System</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.25rem;">
+          <span class="pill pill-cyan">FastAPI</span><span class="pill pill-cyan">Gemini API</span><span
+            class="pill pill-cyan">Python</span><span class="pill pill-cyan">ETL</span>
+        </div>
+        <ul style="list-style:none;display:grid;gap:0.6rem;">
+          <li class="check-item">High-performance async FastAPI backend for document ingestion</li>
+          <li class="check-item">Multi-layer normalization — 100% schema compliance on messy real-world data</li>
+          <li class="check-item">Vision + NLP extraction: unstructured PDFs → structured JSON</li>
+          <li class="check-item"><strong style="color:var(--accent2);">60% reduction</strong> in manual processing time
+          </li>
+        </ul>
+      </div>
+
+      <!-- IterateCV Card -->
+      <div class="reveal project-card" style="--card-accent:var(--accent);flex:1 1 300px;max-width:340px;">
+        <div class="card-top-bar" style="background:linear-gradient(90deg,var(--accent),#4a3fd4);"></div>
+        <div style="font-size:2rem;margin-bottom:1rem;">🤖</div>
+        <h3 style="font-size:1.1rem;font-weight:800;margin-bottom:0.25rem;">IterateCV — AI Application Copilot</h3>
+        <p style="color:var(--muted);font-size:0.82rem;margin-bottom:1.25rem;">Personal MLOps Project &mdash; Full Stack
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.25rem;">
+          <span class="pill">FastAPI</span><span class="pill">Streamlit</span><span class="pill">DuckDB</span><span
+            class="pill">Sentence-Transformers</span>
+        </div>
+        <ul style="list-style:none;display:grid;gap:0.6rem;">
+          <li class="check-item">Hybrid semantic matching engine using MiniLM embeddings + cosine similarity</li>
+          <li class="check-item">Human-in-the-loop Streamlit UI to mitigate LLM hallucinations</li>
+          <li class="check-item">PDF ingestion pipeline using Vision models → Pydantic schema validation</li>
+          <li class="check-item">DuckDB analytics dashboard with ATS-compliant document export</li>
+        </ul>
+      </div>
+
+      <!-- BPO Matrix Card -->
+      <div class="reveal project-card" style="--card-accent:var(--accent3);flex:1 1 300px;max-width:340px;">
+        <div class="card-top-bar" style="background:linear-gradient(90deg,var(--accent3),#c44569);"></div>
+        <div style="font-size:2rem;margin-bottom:1rem;">📊</div>
+        <h3 style="font-size:1.1rem;font-weight:800;margin-bottom:0.25rem;">BPO Matrix — Workflow Analytics</h3>
+        <p style="color:var(--muted);font-size:0.82rem;margin-bottom:1.25rem;">Internal Tool &mdash; PostgreSQL +
+          Streamlit</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.25rem;">
+          <span class="pill pill-pink">Python</span><span class="pill pill-pink">PostgreSQL</span><span
+            class="pill pill-pink">ETL</span><span class="pill pill-pink">Streamlit</span>
+        </div>
+        <ul style="list-style:none;display:grid;gap:0.6rem;">
+          <li class="check-item">Robust ETL pipeline: raw ops data → normalized relational DB</li>
+          <li class="check-item">Normalized schema design for high-volume transaction logs</li>
+          <li class="check-item">Real-time Streamlit dashboard: acceptance rates, bottleneck detection</li>
+        </ul>
+      </div>
+
+      <!-- ARC.ai Card (4th) -->
+      <div class="reveal project-card"
+        style="--card-accent:#34d399;border-color:rgba(52,211,153,0.15);flex:1 1 300px;max-width:340px;">
+        <div class="card-top-bar" style="background:linear-gradient(90deg,#34d399,#059669);"></div>
+        <div style="font-size:2rem;margin-bottom:1rem;">✍️</div>
+        <h3 style="font-size:1.1rem;font-weight:800;margin-bottom:0.25rem;">ARC.ai</h3>
+        <p style="color:var(--muted);font-size:0.82rem;margin-bottom:1.25rem;">Automated Research Comment Generator
+          &mdash; Production</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.25rem;">
+          <span class="pill"
+            style="background:rgba(52,211,153,0.1);border-color:rgba(52,211,153,0.25);color:#6ee7b7;">Python</span>
+          <span class="pill"
+            style="background:rgba(52,211,153,0.1);border-color:rgba(52,211,153,0.25);color:#6ee7b7;">OpenAI API</span>
+          <span class="pill"
+            style="background:rgba(52,211,153,0.1);border-color:rgba(52,211,153,0.25);color:#6ee7b7;">Prompt
+            Engineering</span>
+          <span class="pill"
+            style="background:rgba(52,211,153,0.1);border-color:rgba(52,211,153,0.25);color:#6ee7b7;">NLP</span>
+        </div>
+        <ul style="list-style:none;display:grid;gap:0.6rem;">
+          <li class="check-item">Ingests structured JSON broker data and parses complex multi-condition logic trees</li>
+          <li class="check-item">Dynamically builds precision prompts per record — not generic, context-aware per input
+          </li>
+          <li class="check-item">OpenAI API integration to synthesize coherent, publication-ready research comments</li>
+          <li class="check-item">Fully automated, in live production — <strong style="color:#6ee7b7;">zero manual
+              writing</strong> per research output</li>
+        </ul>
+      </div>
+
+      <!-- BPO-Brain Card (5th — In Progress) -->
+      <div class="reveal project-card"
+        style="--card-accent:#a78bfa;border-color:rgba(167,139,250,0.2);flex:1 1 300px;max-width:340px;">
+        <div class="card-top-bar" style="background:linear-gradient(90deg,#a78bfa,#7c3aed);"></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+          <div style="font-size:2rem;">🧠</div>
+          <span
+            style="font-size:0.7rem;font-weight:700;padding:0.3rem 0.75rem;border-radius:999px;background:rgba(167,139,250,0.15);border:1px solid rgba(167,139,250,0.4);color:#c4b5fd;letter-spacing:0.06em;">⚙
+            IN PROGRESS</span>
+        </div>
+        <h3 style="font-size:1.1rem;font-weight:800;margin-bottom:0.25rem;">BPO-Brain</h3>
+        <p style="color:var(--muted);font-size:0.82rem;margin-bottom:1.25rem;">Domain-Specific LLM &mdash; Local AI
+          Insights Engine</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.25rem;">
+          <span class="pill"
+            style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:#c4b5fd;">Qwen2.5-Coder
+            3B</span>
+          <span class="pill"
+            style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:#c4b5fd;">QLoRA</span>
+          <span class="pill"
+            style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:#c4b5fd;">Ollama</span>
+          <span class="pill"
+            style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:#c4b5fd;">DuckDB</span>
+          <span class="pill"
+            style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:#c4b5fd;">RAG</span>
+        </div>
+        <ul style="list-style:none;display:grid;gap:0.6rem;">
+          <li class="check-item">Fine-tune Qwen2.5-Coder-3B on proprietary BPO data using QLoRA — under $20 on free
+            cloud GPU</li>
+          <li class="check-item">Local deployment via Ollama — zero cost per query, zero data sent externally</li>
+          <li class="check-item">Smart RAG layer queries live DuckDB to generate real-time insights from production data
+          </li>
+          <li class="check-item"><strong style="color:#c4b5fd;">&lt;1.5s response time</strong> — domain-aware chatbot +
+            insights generator</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <style>
+    /* Section styles */
+    .pill {
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(108, 99, 255, 0.12);
+      border: 1px solid rgba(108, 99, 255, 0.25);
+      color: #a89fff;
+    }
+
+    .pill-cyan {
+      background: rgba(0, 212, 255, 0.1);
+      border-color: rgba(0, 212, 255, 0.25);
+      color: #6ee7f7;
+    }
+
+    .pill-pink {
+      background: rgba(255, 101, 132, 0.1);
+      border-color: rgba(255, 101, 132, 0.25);
+      color: #ff9eb0;
+    }
+
+    .story-step {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 255, 255, 0.14);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-top-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .check-item {
+      padding-left: 1.4rem;
+      position: relative;
+      font-size: 0.86rem;
+      color: var(--text);
+      opacity: 0.85;
+    }
+
+    .check-item::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--accent2);
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+  </style>
+
+  <script>
+    // Animated counter
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.target);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      if (!target) return;
+      const isK = target >= 1000;
+      const displayTarget = isK ? target / 1000 : target;
+      let start = 0;
+      const duration = 1600;
+      const step = (timestamp) => {
+        if (!start) start = timestamp;
+        const progress = Math.min((timestamp - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(ease * displayTarget);
+        el.textContent = prefix + current + (isK ? suffix : suffix);
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = prefix + displayTarget + (isK ? suffix : suffix);
+      };
+      requestAnimationFrame(step);
+    }
+
+    // Run counters on load
+    window.addEventListener('load', () => {
+      document.querySelectorAll('[data-target]').forEach(el => animateCounter(el));
+    });
+
+    // Reveal on scroll — deferred so all DOM elements are available
+    window.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    });
+  </script>
+
+  <!-- ═══ VALUE PROP SECTION ═══ -->
+  <section id="value"
+    style="padding:4rem 1.5rem 6rem;background:linear-gradient(180deg,transparent,rgba(108,99,255,0.04),transparent);">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div class="reveal" style="text-align:center;margin-bottom:3rem;">
+        <p
+          style="color:var(--accent3);font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;">
+          The Close</p>
+        <h2 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;letter-spacing:-0.03em;margin-bottom:0.75rem;">How
+          I Drive Value at Infosys</h2>
+        <p style="color:var(--muted);max-width:560px;margin:0 auto;">Three capabilities that directly map to what
+          enterprise CV deployment actually needs.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;">
+        <div class="reveal value-card">
+          <div
+            style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.25rem;">
+            🔗</div>
+          <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:0.6rem;">End-to-End Ownership &amp; Delivery</h3>
+          <p style="color:var(--muted);font-size:0.88rem;line-height:1.65;">Take a raw CV model and engineer the full
+            stack — extraction pipelines, FastAPI layers, normalization algorithms, and cross-team handoffs. Recognized
+            three times by leadership for exceptional delivery and ownership of critical projects with zero silos.</p>
+        </div>
+
+        <div class="reveal value-card" style="animation-delay:0.1s;">
+          <div
+            style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent3),#c44569);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.25rem;">
+            ⚡</div>
+          <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:0.6rem;">Agile Innovation Under Pressure</h3>
+          <p style="color:var(--muted);font-size:0.88rem;line-height:1.65;">Rapidly prototype and iterate complex ML
+            solutions — built a hybrid semantic matching engine from scratch to bypass LLM token limit roadblocks in
+            under a sprint. Thrives in fast-moving enterprise environments where speed and precision both matter.</p>
+        </div>
+
+        <div class="reveal value-card" style="animation-delay:0.2s;">
+          <div
+            style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#f5a623,#e08900);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.25rem;">
+            🗣️</div>
+          <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:0.6rem;">Communication &amp; Client Partnership
+          </h3>
+          <p style="color:var(--muted);font-size:0.88rem;line-height:1.65;">Skilled at translating complex ML concepts
+            into clear, business-relevant language for non-technical stakeholders — bridging the gap between engineering
+            teams and client expectations to ensure aligned, on-time delivery.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ AWARDS STRIP ═══ -->
+  <section style="padding:4rem 1.5rem;max-width:1100px;margin:0 auto;">
+    <div class="reveal" style="text-align:center;margin-bottom:2.5rem;">
+      <p
+        style="color:var(--accent2);font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;">
+        Recognition</p>
+      <h2 style="font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;letter-spacing:-0.03em;">Awards &amp; Certifications
+      </h2>
+    </div>
+
+    <div class="reveal" style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;">
+      <!-- Awards -->
+      <div class="award-badge" style="--badge-color:var(--accent);">
+        <span style="font-size:1.5rem;">🏆</span>
+        <div>
+          <div style="font-weight:700;font-size:0.9rem;">Emerging Innovator of the Year</div>
+          <div style="color:var(--muted);font-size:0.78rem;">2024 — Driving technical innovation</div>
+        </div>
+      </div>
+      <div class="award-badge" style="--badge-color:var(--accent2);">
+        <span style="font-size:1.5rem;">⭐</span>
+        <div>
+          <div style="font-weight:700;font-size:0.9rem;">Employee of the Quarter</div>
+          <div style="color:var(--muted);font-size:0.78rem;">Q2-2024 — Exceptional delivery</div>
+        </div>
+      </div>
+      <div class="award-badge" style="--badge-color:var(--accent3);">
+        <span style="font-size:1.5rem;">🎖️</span>
+        <div>
+          <div style="font-weight:700;font-size:0.9rem;">Engagement Champion</div>
+          <div style="color:var(--muted);font-size:0.78rem;">Q1-2025 — Cross-team leadership</div>
+        </div>
+      </div>
+      <div class="award-badge" style="--badge-color:#ff9f1c;">
+        <span style="font-size:1.5rem;">🔥</span>
+        <div>
+          <div style="font-weight:700;font-size:0.9rem;">High 10 Champion</div>
+          <div style="color:var(--muted);font-size:0.78rem;">Q1-2026 — Positivity, team motivation &amp; leadership
+          </div>
+        </div>
+      </div>
+      <!-- Certifications -->
+      <div class="award-badge" style="--badge-color:#f5a623;">
+        <span style="font-size:1.5rem;">🎓</span>
+        <div>
+          <div style="font-weight:700;font-size:0.9rem;">Data Science &amp; AI Certification</div>
+          <div style="color:var(--muted);font-size:0.78rem;">Boston Institute of Analytics, 2023</div>
+        </div>
+      </div>
+      <div class="award-badge" style="--badge-color:#0f62fe;">
+        <span style="font-size:1.5rem;">🔵</span>
+        <div>
+          <div style="font-weight:700;font-size:0.9rem;">Machine Learning with Python</div>
+          <div style="color:var(--muted);font-size:0.78rem;">IBM Certification, 2023</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT / FOOTER ═══ -->
+  <footer id="contact" style="border-top:1px solid var(--border);padding:4rem 1.5rem 3rem;text-align:center;">
+    <div style="max-width:600px;margin:0 auto;">
+      <h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:900;letter-spacing:-0.03em;margin-bottom:0.5rem;">Let's
+        Build Something Real</h2>
+      <p style="color:var(--muted);margin-bottom:2rem;">Computer Vision models that don't just demo — they deploy.</p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-bottom:3rem;">
+        <a href="mailto:abhaykanjoor@gmail.com" class="btn btn-primary">✉️ abhaykanjoor@gmail.com</a>
+        <a href="https://linkedin.com/in/abhayksankar" target="_blank" class="btn btn-outline">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+          </svg>
+          LinkedIn
+        </a>
+      </div>
+      <div style="display:flex;gap:1.5rem;justify-content:center;color:var(--muted);font-size:0.85rem;flex-wrap:wrap;">
+        <span>📍 Shoranur, Kerala</span>
+        <span>📞 +91-8111891175</span>
+        <span>🎓 B.Tech Computer Science — ASIET</span>
+      </div>
+      <p style="color:rgba(255,255,255,0.12);font-size:0.75rem;margin-top:2.5rem;">Abhay Sankar K &copy; 2025</p>
+    </div>
+  </footer>
+
+  <style>
+    .value-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .value-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(108, 99, 255, 0.25);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .award-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--badge-color, var(--accent));
+      border-radius: 10px;
+      padding: 0.9rem 1.25rem;
+      backdrop-filter: blur(10px);
+      transition: transform 0.2s, box-shadow 0.2s;
+      max-width: 320px;
+    }
+
+    .award-badge:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+
+</body>
+
+</html>
