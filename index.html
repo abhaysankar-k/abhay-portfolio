@@ -56,7 +56,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 1rem 2.5rem;
-      background: rgba(7, 7, 15, 0.8);
+      background: rgba(7, 7, 15, 0.85);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
@@ -68,6 +68,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      white-space: nowrap;
     }
 
     .nav-links {
@@ -87,6 +88,71 @@
     .nav-links a:hover {
       color: var(--text);
     }
+
+    /* hamburger button — hidden on desktop */
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .nav-burger:hover { background: rgba(255,255,255,0.06); }
+    .nav-burger span {
+      display: block;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--text);
+      transition: transform 0.3s, opacity 0.3s, width 0.3s;
+    }
+    .nav-burger span:nth-child(2) { width: 70%; margin-left: auto; }
+    .nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* mobile dropdown */
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 61px;
+      left: 0;
+      right: 0;
+      z-index: 99;
+      background: rgba(7, 7, 15, 0.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      flex-direction: column;
+      gap: 0;
+      list-style: none;
+      transform: translateY(-8px);
+      opacity: 0;
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .nav-mobile.open {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .nav-mobile li { border-bottom: 1px solid var(--border); }
+    .nav-mobile li:last-child { border-bottom: none; }
+    .nav-mobile a {
+      display: block;
+      padding: 1rem 0;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 1.05rem;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .nav-mobile a:hover { color: var(--accent2); }
 
     /* ─── HERO ─── */
     .hero {
@@ -310,15 +376,16 @@
     }
 
     /* ─── RESPONSIVE ─── */
-    @media (max-width: 600px) {
+    @media (max-width: 640px) {
       nav {
         padding: 1rem 1.25rem;
       }
-
       .nav-links {
-        gap: 1rem;
+        display: none;
       }
-
+      .nav-burger {
+        display: flex;
+      }
       .metric-card {
         min-width: 140px;
         padding: 1.25rem 1rem;
@@ -330,15 +397,27 @@
 <body>
 
   <!-- NAV -->
-  <nav>
+  <nav id="main-nav">
     <div class="nav-logo">Abhay Sankar K</div>
+    <!-- Desktop links -->
     <ul class="nav-links">
       <li><a href="#cv">CV Work</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#value">At Infosys</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <!-- Mobile burger -->
+    <button class="nav-burger" id="nav-burger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+  <!-- Mobile dropdown -->
+  <ul class="nav-mobile" id="nav-mobile">
+    <li><a href="#cv">CV Work</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#value">At Infosys</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 
   <!-- HERO -->
   <section class="hero" id="home">
@@ -762,7 +841,30 @@
       }, { threshold: 0.1 });
       document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     });
+
+    // Hamburger nav toggle
+    window.addEventListener('DOMContentLoaded', () => {
+      const burger = document.getElementById('nav-burger');
+      const mobileMenu = document.getElementById('nav-mobile');
+      if (!burger || !mobileMenu) return;
+
+      burger.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.toggle('open');
+        burger.classList.toggle('open', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+
+      // Close menu when a link is tapped
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('open');
+          burger.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    });
   </script>
+
 
   <!-- ═══ VALUE PROP SECTION ═══ -->
   <section id="value"
